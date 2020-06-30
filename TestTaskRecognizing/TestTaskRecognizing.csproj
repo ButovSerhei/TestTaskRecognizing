@@ -7,13 +7,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Emgu.CV" Version="4.3.0.3890" />
-      <PackageReference Include="Emgu.CV.runtime.windows" Version="4.3.0.3890" />
-      <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.6.20305.6" />
+      <Compile Remove="Resources\**" />
+      <EmbeddedResource Remove="Resources\**" />
+      <None Remove="Resources\**" />
+      <Page Remove="Resources\**" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Resources" />
+      <PackageReference Include="Emgu.CV" Version="4.3.0.3890" />
+      <PackageReference Include="Emgu.CV.runtime.windows" Version="4.3.0.3890" />
+      <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.6.20305.6" />
     </ItemGroup>
 
 </Project>
