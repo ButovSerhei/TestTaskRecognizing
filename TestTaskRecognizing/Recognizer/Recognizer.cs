@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
@@ -15,17 +17,17 @@ namespace TestTaskRecognizing.Recognizer
 
         #region Example pictures
 
-        private const string newItemPicPath =
-            @"..\Resources\NewItemExample.jpg";
+        string workingDirectory => Environment.CurrentDirectory;
+        string startupPath => Directory.GetParent(workingDirectory).Parent.Parent.FullName;
 
-        private const string newItemKeepItemTile = 
-            @"..\Resources\keepItemsTile.png";
+        private string newItemPicPath => startupPath + "/Resources/NewItemExample.jpg";
+        
+        private  string newItemKeepItemTile => startupPath +  @"/Resources/keepItemsTile.png";
 
-        private const string customizeItemPicPath =
-            @"..\Resources\CustomizeHeader.png";
+        private  string customizeItemPicPath => startupPath +  @"/Resources/CustomizeHeader.png" ;
 
-        private const string customizeTalePicPath =
-            @"..\Resources\customizeTileActive.png";
+        private  string customizeTalePicPath => startupPath +  @"/Resources/customizeTileActive.png";
+       
 
         #endregion
 
@@ -33,9 +35,9 @@ namespace TestTaskRecognizing.Recognizer
 
         public Recognizer(Image image)
         {
-            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage.png");
+            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage (1).png");
             //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\Image.jpg");
-            // _image = new Bitmap(tempImage).ToImage<Bgr,byte>();
+             //_image = new Bitmap(tempImage).ToImage<Bgr,byte>();
             _image = new Bitmap(image).ToImage<Bgr,byte>();
             ResultImage = _image.ToBitmap();
 
@@ -119,7 +121,7 @@ namespace TestTaskRecognizing.Recognizer
             CvInvoke.Rectangle(_image, rect, new MCvScalar(255,0,0), 1);
 
             #endregion
-            entity.Tiles.Add(new CustomItemTile(template.Height - 2, template.Width - 2, true) { indentX = minLoc.X, indentY = minLoc.Y });
+            entity.Tiles.Add(new CustomItemTile(template.Height - 4, template.Width - 10, true) { indentX = minLoc.X, indentY = minLoc.Y });
 
             return entity;
         }

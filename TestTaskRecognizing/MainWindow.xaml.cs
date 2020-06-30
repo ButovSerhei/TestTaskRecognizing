@@ -29,8 +29,17 @@ namespace TestTaskRecognizing
         {
             InitializeComponent();
             _recognizer = new Recognizer.Recognizer(ApiManager.GetImage());
-            var page = _recognizer._page as CustomizeEntity;
-            TilePosition.Content = page.Tiles.FirstOrDefault(x => x.IsActive).Position;
+            if (_recognizer._page is CustomizeEntity)
+            {
+                var page = _recognizer._page as CustomizeEntity;
+                TilePosition.Content = page.Tiles.FirstOrDefault(x => x.IsActive).Position;
+                StartTilePositionTextBox.Visibility = Visibility.Visible;
+                TilePosition.Visibility = Visibility.Visible;
+                PositionLabel.Visibility = Visibility.Visible;
+                TheRouteIsLabel.Visibility = Visibility.Visible;
+                RouteLabel.Visibility = Visibility.Visible;
+            }
+
             ResultImage.Source = BitmapToImageSource((Bitmap)_recognizer.ResultImage);
         }
 

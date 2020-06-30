@@ -8,10 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Image x:Name="ResultImage" HorizontalAlignment="Left" Height="361" Margin="10,10,0,0" VerticalAlignment="Top" Width="522"/>
-        <TextBox x:Name="StartTilePositionTextBox" HorizontalAlignment="Left" Margin="592,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="StartTilePositionTextBox_TextChanged"/>
-        <Label Content="The route is:" HorizontalAlignment="Left" Margin="592,93,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="RouteLabel" Content="Label" HorizontalAlignment="Left" Margin="672,93,0,0" VerticalAlignment="Top"/>
-        <Label Content="Position of active tile is:" HorizontalAlignment="Left" Margin="592,62,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="TilePosition" Content="" HorizontalAlignment="Left" Margin="725,62,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="StartTilePositionTextBox" Visibility="Hidden"  HorizontalAlignment="Left" Margin="592,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="StartTilePositionTextBox_TextChanged"/>
+        <Label x:Name="TheRouteIsLabel" Content="The route is:" HorizontalAlignment="Left" Margin="592,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="RouteLabel" Visibility="Hidden" Content="Label" HorizontalAlignment="Left" Margin="672,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="PositionLabel" Content="Position of active tile is:" Visibility="Hidden"  HorizontalAlignment="Left" Margin="592,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="TilePosition" Visibility="Hidden"  Content="" HorizontalAlignment="Left" Margin="725,62,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
