@@ -17,22 +17,25 @@ namespace TestTaskRecognizing.Entities
             var tilePosition = Tiles.FirstOrDefault(x => x.IsActive).Position -1 ; 
             startPosition--;
 
-            int rows, cols, start, finish;
-            start = startPosition > tilePosition ? startPosition : tilePosition;
-            finish = startPosition > tilePosition ? tilePosition : startPosition;
+            int rows, rowsTile, cols, start, finish, coef;
 
-            rows = start / 4; 
-            cols = start - 4 * rows - finish;
-
-            for (int i = Math.Abs(rows); i != 0; i--)
+            rows = startPosition / 4;
+            rowsTile = tilePosition / 4; 
+            cols = ((startPosition - 4 * rows) - (tilePosition  - 4 * rowsTile)) * 1;
+            if (rows != rowsTile)
             {
-                instructions += rows > 0 ? " Up " : " Down ";
+                for (int i = Math.Abs(rows != 0 ? rows : rowsTile); i != 0; i--)
+                {
+                    instructions += rows > 0 ? " Up " : " Down ";
+                }
             }
 
             for (int i = Math.Abs(cols); i != 0; i--)
-            {
-                instructions += cols < 0 ? " Right " : " Left ";
-            }
+                {
+                    instructions += cols < 0 ? " Right " : " Left ";
+                }
+            
+
             return string.IsNullOrEmpty(instructions) ? " It's active tile " : instructions;
         }
 

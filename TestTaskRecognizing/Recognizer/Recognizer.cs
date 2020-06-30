@@ -19,33 +19,39 @@ namespace TestTaskRecognizing.Recognizer
     public class Recognizer
     {
         private readonly Image<Bgr, byte> _image;
-        public Page _page;
+        public readonly Page _page;
+
+        #region Example pictures
 
         private const string newItemPicPath =
             @"..\Resources\NewItemExample.jpg";
+
+        private const string newItemKeepItemTile = 
+            @"..\Resources\keepItemsTile.png";
 
         private const string customizeItemPicPath =
             @"..\Resources\CustomizeHeader.png";
 
         private const string customizeTalePicPath =
             @"..\Resources\customizeTileActive.png";
-       
+
+        #endregion
 
         public Image ResultImage { get; set; }
 
         public Recognizer(Image image)
         {
-            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage (1).png");
-            //image = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\Image.jpg");
-            // _image = new Bitmap(tempImage).ToImage<Bgr,byte>();
-            _image = new Bitmap(image).ToImage<Bgr,byte>();
+            var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage (1).png");
+            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\Image.jpg");
+            //_image = new Bitmap(image).ToImage<Bgr,byte>();
+             _image = new Bitmap(tempImage).ToImage<Bgr,byte>();
             ResultImage = _image.ToBitmap();
 
             _page = Recognize();
 
             if (_page is NewItemEntity)
             {
-               //TODO: Method to recognize tiles
+                _page = RecognizeTiles(newItemKeepItemTile, _page as NewItemEntity);
             }
             else if(_page is CustomizeEntity)
             {
@@ -121,13 +127,13 @@ namespace TestTaskRecognizing.Recognizer
             CvInvoke.Rectangle(_image, rect, new MCvScalar(255,0,0), 1);
 
             #endregion
-            entity.Tiles.Add(new CustomItemTile(template.Height - 10, template.Width - 10, true) { indentX = minLoc.X, indentY = minLoc.Y });
+            entity.Tiles.Add(new CustomItemTile(template.Height - 2, template.Width - 2, true) { indentX = minLoc.X, indentY = minLoc.Y });
 
             return entity;
         }
 
 
-        private NewItemEntity RecognizeTiles(string exampleImagePath, ref NewItemEntity entity)
+        private NewItemEntity RecognizeTiles(string exampleImagePath, NewItemEntity entity)
         {
             var exampleImage = (Bitmap)Image.FromFile(exampleImagePath);
             var template = new Bitmap(exampleImage).ToImage<Bgr, byte>();
@@ -153,7 +159,6 @@ namespace TestTaskRecognizing.Recognizer
             entity.Tiles.Add(new NewItemTile(template.Height - 10, template.Width - 10, true) { indentX = minLoc.X, indentY = minLoc.Y });
 
             return entity;
-
         }
     }
 
