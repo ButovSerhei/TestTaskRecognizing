@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Policy;
-using System.Threading.Tasks;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
-using Emgu.CV.OCR;
-using Emgu.CV.Stitching;
 using Emgu.CV.Structure;
 using TestTaskRecognizing.Entities;
 using Image = System.Drawing.Image;
@@ -41,7 +33,7 @@ namespace TestTaskRecognizing.Recognizer
 
         public Recognizer(Image image)
         {
-            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage (1).png");
+            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage.png");
             //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\Image.jpg");
             // _image = new Bitmap(tempImage).ToImage<Bgr,byte>();
             _image = new Bitmap(image).ToImage<Bgr,byte>();

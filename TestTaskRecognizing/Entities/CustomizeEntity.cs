@@ -53,7 +53,7 @@ namespace TestTaskRecognizing.Entities
         private new int CalculatePosition()
         {
             int position = 0;
-
+            if (indentX < startXPoint && indentY < startYPoint) return 1;
             for (int i = startYPoint; i <= yThreshold; i += Height)
             {
                 for (int j = startXPoint; j <= xThreshold; j += Width)
