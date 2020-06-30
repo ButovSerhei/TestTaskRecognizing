@@ -41,10 +41,10 @@ namespace TestTaskRecognizing.Recognizer
 
         public Recognizer(Image image)
         {
-            var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage (1).png");
+            //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\getImage (1).png");
             //var tempImage = Image.FromFile("C:\\Users\\Kwazar\\Desktop\\Image.jpg");
-            //_image = new Bitmap(image).ToImage<Bgr,byte>();
-             _image = new Bitmap(tempImage).ToImage<Bgr,byte>();
+            // _image = new Bitmap(tempImage).ToImage<Bgr,byte>();
+            _image = new Bitmap(image).ToImage<Bgr,byte>();
             ResultImage = _image.ToBitmap();
 
             _page = Recognize();
