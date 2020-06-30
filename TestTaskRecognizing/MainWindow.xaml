@@ -1,0 +1,17 @@
+﻿<Window x:Class="TestTaskRecognizing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestTaskRecognizing"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Image x:Name="ResultImage" HorizontalAlignment="Left" Height="361" Margin="10,10,0,0" VerticalAlignment="Top" Width="522"/>
+        <TextBox x:Name="StartTilePositionTextBox" HorizontalAlignment="Left" Margin="592,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="StartTilePositionTextBox_TextChanged"/>
+        <Label Content="The route is:" HorizontalAlignment="Left" Margin="592,93,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="RouteLabel" Content="Label" HorizontalAlignment="Left" Margin="672,93,0,0" VerticalAlignment="Top"/>
+        <Label Content="Position of active tile is:" HorizontalAlignment="Left" Margin="592,62,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="TilePosition" Content="" HorizontalAlignment="Left" Margin="725,62,0,0" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
