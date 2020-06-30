@@ -2,8 +2,13 @@
 
 namespace TestTaskRecognizing.Entities
 {
-    public class Tile : Item
+    public class Tile : IItem
     {
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public int indentX { get; set; }
+        public int indentY { get; set; }
+        public int Square { get; set; }
         public string Name { get; set; }
         public virtual int Position => CalculatePosition();
 
@@ -20,5 +25,7 @@ namespace TestTaskRecognizing.Entities
             Width = width;
             IsActive = isActive;
         }
+
+        
     }
 }

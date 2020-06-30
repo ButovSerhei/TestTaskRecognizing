@@ -17,7 +17,7 @@ namespace TestTaskRecognizing.Entities
             var tilePosition = Tiles.FirstOrDefault(x => x.IsActive).Position -1 ; 
             startPosition--;
 
-            int rows, cols, start, finish, coef;
+            int rows, cols, start, finish;
             start = startPosition > tilePosition ? startPosition : tilePosition;
             finish = startPosition > tilePosition ? tilePosition : startPosition;
 

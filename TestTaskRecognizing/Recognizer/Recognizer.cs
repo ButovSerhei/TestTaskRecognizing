@@ -22,13 +22,13 @@ namespace TestTaskRecognizing.Recognizer
         public Page _page;
 
         private const string newItemPicPath =
-            @"C:\Users\Kwazar\RiderProjects\TestTaskRecognizing\TestTaskRecognizing\Resources\NewItemExample.jpg";
+            @"..\Resources\NewItemExample.jpg";
 
         private const string customizeItemPicPath =
-            @"C:\Users\Kwazar\RiderProjects\TestTaskRecognizing\TestTaskRecognizing\Resources\CustomizeHeader.png";
+            @"..\Resources\CustomizeHeader.png";
 
         private const string customizeTalePicPath =
-            @"C:\Users\Kwazar\RiderProjects\TestTaskRecognizing\TestTaskRecognizing\Resources\customizeTileActive.png";
+            @"..\Resources\customizeTileActive.png";
        
 
         public Image ResultImage { get; set; }
@@ -127,17 +127,32 @@ namespace TestTaskRecognizing.Recognizer
         }
 
 
-        private void RecognizeTiles(string exampleImagePath, ref NewItemEntity entity)
+        private NewItemEntity RecognizeTiles(string exampleImagePath, ref NewItemEntity entity)
         {
-            var example = (Bitmap)Image.FromFile(exampleImagePath);
+            var exampleImage = (Bitmap)Image.FromFile(exampleImagePath);
+            var template = new Bitmap(exampleImage).ToImage<Bgr, byte>();
 
-            int searchingIndentX = example.Width / 100 * 10,
-                searchingIndentY = example.Height / 100 * 10;
+            entity.Tiles = new List<NewItemTile>();
 
-            var template = new Bitmap(example).ToImage<Bgr, byte>();
+            #region Recognize
 
-            var imageOut = new Mat();
-            CvInvoke.MatchTemplate(_image, template, imageOut, TemplateMatchingType.Sqdiff);
+            var imgOut = new Mat();
+            var imgNormalized = new Mat();
+            double minVal = 0.0,
+                maxVal = 0.0;
+            var minLoc = new Point();
+            var maxLoc = new Point();
+
+            CvInvoke.MatchTemplate(_image, template, imgOut, TemplateMatchingType.Sqdiff);
+            CvInvoke.Normalize(imgOut, imgNormalized, 0, 1, NormType.MinMax, DepthType.Cv64F);
+            CvInvoke.MinMaxLoc(imgNormalized, ref minVal, ref maxVal, ref minLoc, ref maxLoc);
+            Rectangle rect = new Rectangle(minLoc, template.Size);
+            CvInvoke.Rectangle(_image, rect, new MCvScalar(255, 0, 0), 1);
+
+            #endregion
+            entity.Tiles.Add(new NewItemTile(template.Height - 10, template.Width - 10, true) { indentX = minLoc.X, indentY = minLoc.Y });
+
+            return entity;
 
         }
     }
